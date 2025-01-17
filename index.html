@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Invite</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .yes-button {
+            background-color: green;
+            color: white;
+        }
+
+        .no-button {
+            background-color: red;
+            color: white;
+            position: relative;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: red;
+            border-radius: 50%;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(100vw * var(--random-x)));
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Would you like to go for the movie?</h1>
+<div class="buttons">
+    <button class="yes-button" onclick="sayYes()">Yes</button>
+    <button class="no-button" onmouseover="moveNoButton(this)">No</button>
+</div>
+
+<script>
+    // Create red sparkles
+    const sparkleCount = 50;
+    for (let i = 0; i < sparkleCount; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.setProperty('--random-x', Math.random());
+        sparkle.style.left = Math.random() * window.innerWidth + 'px';
+        sparkle.style.animationDuration = 3 + Math.random() * 2 + 's';
+        document.body.appendChild(sparkle);
+    }
+
+    // Yes button action
+    function sayYes() {
+        const message = document.createElement('div');
+        message.innerHTML = `<h1 style="color: white;">DONE, LET'S GOOO ❤️</h1>
+                                <p style="color: white; text-align: center; font-size: 1.2rem;">text mee soon</p>`;
+        document.body.innerHTML = '';
+        document.body.appendChild(message);
+    }
+
+    // No button avoidance
+    function moveNoButton(button) {
+        const randomX = Math.random() * (window.innerWidth - button.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - button.offsetHeight);
+        button.style.position = 'absolute';
+        button.style.left = `${randomX}px`;
+        button.style.top = `${randomY}px`;
+    }
+</script>
+</body>
+</html>
+
+
+
+
